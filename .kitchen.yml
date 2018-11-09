@@ -13,8 +13,10 @@ verifier:
   name: inspec
 
 platforms:
-  - name: ubuntu-16.04
   - name: centos-7
+    driver_config:
+        network:
+             - ["forwarded_port", {guest: 3301, host: 3333}]
 
 suites:
   - name: default

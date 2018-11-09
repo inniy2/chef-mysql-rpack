@@ -1,0 +1,29 @@
+{code:title=ins-dm-dsm10[1-2] (screen - 0 root) }
+
+{code}
+use mysql;
+
+set session sql_log_bin=0;
+
+create user 'repl'@'%' identified by 'rep1ica';
+
+GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%';
+
+
+create user 'gguser'@'apaas%' identified by 'pguser01';
+
+GRANT ALL PRIVILEGES ON *.* TO 'gguser'@'apaas%' WITH GRANT OPTION;
+
+
+create user 'pandora_monitor'@'kpan%' identified by '8and0ra';
+
+GRANT SELECT ON `mysql`.* TO 'pandora_monitor'@'kpan%';
+
+
+flush privileges;
+
+{code}
+
+
+
+
