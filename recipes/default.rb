@@ -44,10 +44,10 @@ end
 
 # Create MySQL Directory
 # cd / ; mkdir -pvm 755 /MYSQL ; cd /MYSQL
-# mkdir -pvm 755 cloud101 ; cd cloud101;
+# mkdir -pvm 755 XXXXX ; cd XXXXX;
 # mkdir -pvm 755 binlog data env innodb innodb-log log var work certs;
-# mkdir -pvm 777 /MYSQL/cloud101/work/tmp
-# cd ../ ; chown -R mysql:mysql cloud101 ;
+# mkdir -pvm 777 /MYSQL/XXXXX/work/tmp
+# cd ../ ; chown -R mysql:mysql XXXXX ;
 
 #directory '/MYSQL' do
 #  owner 'mysql'
@@ -56,7 +56,7 @@ end
 #  action :create
 #end
 
-directory '/MYSQL/cloud101' do
+directory '/MYSQL/XXXXX' do
   recursive true
   owner 'mysql'
   group 'mysql'
@@ -65,7 +65,7 @@ directory '/MYSQL/cloud101' do
 end
 
 %w[ binlog data env innodb innodb-log log var work certs ].each do | path | 
-    directory "/MYSQL/cloud101/#{path}" do
+    directory "/MYSQL/XXXXX/#{path}" do
       owner 'mysql'
       group 'mysql'
       mode '0755'
@@ -73,7 +73,7 @@ end
     end
 end
 
-directory '/MYSQL/cloud101/work/tmp' do
+directory '/MYSQL/XXXXX/work/tmp' do
   owner 'mysql'
   group 'mysql'
   mode '0777'
@@ -90,18 +90,18 @@ end
 
 ## copying MySQL data
 # cd /var/lib/mysql
-# mv ibdata1 /MYSQL/cloud101/innodb/d1
-# mv ib_buffer_pool /MYSQL/cloud101/innodb/innodb_buffer_pool.info
-# mv ib_logfile* /MYSQL/cloud101/innodb-log
-# mv mysql performance_schema sys /MYSQL/cloud101/data/.
-# mv *.pem /MYSQL/cloud101/certs/.
+# mv ibdata1 /MYSQL/XXXXX/innodb/d1
+# mv ib_buffer_pool /MYSQL/XXXXX/innodb/innodb_buffer_pool.info
+# mv ib_logfile* /MYSQL/XXXXX/innodb-log
+# mv mysql performance_schema sys /MYSQL/XXXXX/data/.
+# mv *.pem /MYSQL/XXXXX/certs/.
 # 
 # \rm auto.cnf?
-# # ??? Where did /MYSQL/cloud101/data/mysql directory come from?
+# # ??? Where did /MYSQL/XXXXX/data/mysql directory come from?
 
 
 #src_filepath = '/var/lib/mysql'
-#tar_filepath = '/MYSQL/cloud101'
+#tar_filepath = '/MYSQL/XXXXX'
 #bash 'Copying MySQL data' do
   #cwd ::File.dirname('/var/lib/mysql')
   #code <<-EOH
@@ -110,5 +110,5 @@ end
     #mv ib_logfile* #{tar_filepath}/innodb-log/
     #mv mysql peformance_schema sys #{tar_filepath}/data/
     #EOH
-  #not_if { ::File.exist?('/MYSQL/cloud101/data/innodb/d1') }
+  #not_if { ::File.exist?('/MYSQL/XXXXX/data/innodb/d1') }
 #end

@@ -67,11 +67,11 @@ end
 
 # Create MySQL Directory
 # cd / ; mkdir -pvm 755 /MYSQL ; cd /MYSQL
-# mkdir -pvm 755 cloud101 ; cd cloud101;
+# mkdir -pvm 755 XXXXX ; cd XXXXX;
 # mkdir -pvm 755 binlog data env innodb innodb-log log var work certs;
-# mkdir -pvm 777 /MYSQL/cloud101/work/tmp
-# cd ../ ; chown -R mysql:mysql cloud101 ;
-describe file("/MYSQL/cloud101") do
+# mkdir -pvm 777 /MYSQL/XXXXX/work/tmp
+# cd ../ ; chown -R mysql:mysql XXXXX ;
+describe file("/MYSQL/XXXXX") do
    it { should exist }
    it { should be_directory }
    it { should be_owned_by 'mysql' }
@@ -79,7 +79,7 @@ describe file("/MYSQL/cloud101") do
 end
 
 %w[ binlog data env innodb innodb-log log var work certs ].each do | path | 
-  describe file("/MYSQL/cloud101/#{path}") do
+  describe file("/MYSQL/XXXXX/#{path}") do
     it { should exist }
     it { should be_directory }
     it { should be_owned_by 'mysql' }
@@ -87,7 +87,7 @@ end
   end
 end
 
-describe file("/MYSQL/cloud101/work/tmp") do
+describe file("/MYSQL/XXXXX/work/tmp") do
    it { should exist }
    it { should be_directory }
    it { should be_owned_by 'mysql' }
@@ -103,11 +103,11 @@ end
 
 ## copying MySQL data
 # cd /var/lib/mysql ? Where is the directories and files?
-# mv ibdata1 /MYSQL/cloud101/innodb/d1
-# mv ib_buffer_pool /MYSQL/cloud101/innodb/innodb_buffer_pool.info
-# mv ib_logfile* /MYSQL/cloud101/innodb-log
-# mv mysql performance_schema sys /MYSQL/cloud101/data/.
-# mv *.pem /MYSQL/cloud101/certs/.
+# mv ibdata1 /MYSQL/XXXXX/innodb/d1
+# mv ib_buffer_pool /MYSQL/XXXXX/innodb/innodb_buffer_pool.info
+# mv ib_logfile* /MYSQL/XXXXX/innodb-log
+# mv mysql performance_schema sys /MYSQL/XXXXX/data/.
+# mv *.pem /MYSQL/XXXXX/certs/.
 #
 # \rm auto.cnf ? Why do I need to delete the file
 
@@ -121,26 +121,26 @@ describe file("/var/lib/mysql/ibdata1") do
    it { should be_file }
 end
 
-describe file("/MYSQL/cloud101/innodb/d1") do
+describe file("/MYSQL/XXXXX/innodb/d1") do
    it { should exist }
    it { should be_file }
    it { should be_owned_by 'mysql' }
 end
 
-describe file("/MYSQL/cloud101/innodb/innodb_buffer_pool.info") do
+describe file("/MYSQL/XXXXX/innodb/innodb_buffer_pool.info") do
    it { should exist }
    it { should be_file }
    it { should be_owned_by 'mysql' }
 end
 
-describe file("/MYSQL/cloud101/innodb-log/ib_logfile*") do
+describe file("/MYSQL/XXXXX/innodb-log/ib_logfile*") do
    it { should exist }
    it { should be_file }
    it { should be_owned_by 'mysql' }
 end
 
 %w[ mysql performance_schema sys ].each do | path | 
-  describe file("/MYSQL/cloud101/data/#{path}") do
+  describe file("/MYSQL/XXXXX/data/#{path}") do
     it { should exist }
     it { should be_directory }
     it { should be_owned_by 'mysql' }
@@ -148,7 +148,7 @@ end
   end
 end
 
-describe file("/MYSQL/cloud101/certs/*.pem") do
+describe file("/MYSQL/XXXXX/certs/*.pem") do
    it { should exist }
    it { should be_file }
    it { should be_owned_by 'mysql' }
